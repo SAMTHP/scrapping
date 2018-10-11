@@ -92,13 +92,15 @@ def trading
 	cours = Hash[tab_crypto.zip(tab_price)]
 
 	cours.each do |k, v|
-		puts "La crypto #{k} a une valeur de : #{v}"
+		puts "La crypto --#{k}-- a une valeur de : #{v}"
 	end
 
 
 end
 
 def boucle_chain
+
+	for num in 1..50
 	trading
 	puts "Rafraîchissement du cours dans 10 secondes"
 	sleep 1
@@ -120,9 +122,32 @@ def boucle_chain
 	sleep 1
 	puts "Rafraîchissement du cours dans 01 secondes"
 	sleep 1
-
 	trading
+
+	end
+
 end
+
+########################################       Scrapping       ###########################################
+
+### Route des députés ###
+
+##########################################################################################################
+
+def depute_name
+
+	page = Nokogiri::HTML(open('http://www2.assemblee-nationale.fr/deputes/liste/alphabetique'))
+	site = []
+	site = page.css('div#deputes-list a')
+	liste_finale = []
+	site.each do |nom|
+		liste_finale << nom.text
+	end
+	puts liste_finale
+
+end
+
+
 ##########################################################################################################
 
 ### Menu ###
@@ -148,9 +173,7 @@ page_val_doise = "http://annuaire-des-mairies.com/val-d-oise.html"
 	puts ""
 	puts "Exercice : 'Trader de l'obscur'"
 	puts "4 - Cours des cryptomonnaies"
-	puts "5 - .............."
-	puts "6 - .............."
-	puts "7 - .............."
+	puts "5 - Liste des députés"
 	puts ""
 	puts "# - Pour sortir : appuyer sur entrer"
 	puts ""
@@ -166,7 +189,9 @@ page_val_doise = "http://annuaire-des-mairies.com/val-d-oise.html"
 	elsif choix == 3
 		all_mails_val_doise (page_val_doise)
 	elsif choix == 4
-		boucle_chain
+		boucle_chains
+	elsif choix == 5
+		depute_name
 	elsif choix == 'y'
 		puts "A bientôt :)"
 	end
