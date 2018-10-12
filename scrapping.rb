@@ -100,7 +100,7 @@ end
 
 def boucle_chain
 
-	for num in 1..50
+	
 	trading
 	puts "Rafraîchissement du cours dans 10 secondes"
 	sleep 1
@@ -124,7 +124,7 @@ def boucle_chain
 	sleep 1
 	trading
 
-	end
+	
 
 end
 
